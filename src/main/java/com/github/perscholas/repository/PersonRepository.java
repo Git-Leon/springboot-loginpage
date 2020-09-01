@@ -1,5 +1,6 @@
-package com.github.perscholas;
+package com.github.perscholas.repository;
 
+import com.github.perscholas.model.Person;
 import org.springframework.data.repository.CrudRepository;
 
 /**

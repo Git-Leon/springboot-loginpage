@@ -1,5 +1,6 @@
-package com.github.perscholas;
+package com.github.perscholas.service;
 
+import com.github.perscholas.repository.PersonRepository;
 import org.springframework.stereotype.Service;
 
 /**
