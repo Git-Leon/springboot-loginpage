@@ -1,19 +1,25 @@
 package com.github.perscholas.model;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
 public class User {
+    @Id
+    @Column (name = "id") // name if id column
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
     private String username;
     private String password;
-    private String passwordConfirm;
-    private Set<Role> roles;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Transient
+    private String passwordConfirm;
+
+    @ManyToMany(targetEntity = Role.class, fetch=FetchType.EAGER)
+    @ElementCollection(targetClass = Role.class)
+    private List<Role> userRoles;
+
     public Long getId() {
         return id;
     }
@@ -38,7 +44,6 @@ public class User {
         this.password = password;
     }
 
-    @Transient
     public String getPasswordConfirm() {
         return passwordConfirm;
     }
@@ -47,13 +52,11 @@ public class User {
         this.passwordConfirm = passwordConfirm;
     }
 
-    @ManyToMany
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    public Set<Role> getRoles() {
-        return roles;
+    public List<Role> getUserRoles() {
+        return userRoles;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setUserRoles(List<Role> userRoles) {
+        this.userRoles = userRoles;
     }
 }

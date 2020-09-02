@@ -1,17 +1,26 @@
 package com.github.perscholas.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "role")
 public class Role {
-    private Long id;
-    private String name;
-    private Set<User> users;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column (name = "id") // name if id column
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    private Long id;
+    private String name;
+
+    @JsonIgnore
+    @ManyToMany(targetEntity = User.class, fetch=FetchType.EAGER)
+    @ElementCollection(targetClass = User.class)
+    private List<User> users;
+
     public Long getId() {
         return id;
     }
@@ -28,12 +37,11 @@ public class Role {
         this.name = name;
     }
 
-    @ManyToMany(mappedBy = "roles")
-    public Set<User> getUsers() {
+    public List<User> getUsers() {
         return users;
     }
 
-    public void setUsers(Set<User> users) {
+    public void setUsers(List<User> users) {
         this.users = users;
     }
 }
