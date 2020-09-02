@@ -1,7 +1,7 @@
-package com.github.perscholas.validator;
+package com.github.curriculeon.validator;
 
-import com.github.perscholas.model.User;
-import com.github.perscholas.service.UserService;
+import com.github.curriculeon.model.UserProfile;
+import com.github.curriculeon.service.UserProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -9,18 +9,18 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 @Component
-public class UserValidator implements Validator {
+public class UserProfileValidator implements Validator {
     @Autowired
-    private UserService userService;
+    private UserProfileService userService;
 
     @Override
     public boolean supports(Class<?> aClass) {
-        return User.class.equals(aClass);
+        return UserProfile.class.equals(aClass);
     }
 
     @Override
     public void validate(Object o, Errors errors) {
-        User user = (User) o;
+        UserProfile user = (UserProfile) o;
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "NotEmpty");
         if (user.getUsername().length() < 6 || user.getUsername().length() > 32) {

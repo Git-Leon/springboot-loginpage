@@ -5,8 +5,8 @@
     <artifactId>SpringBootSampleWebApp</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>SpringBootSampleWebApp</name>
-    <description>Demo project for Spring Boot With JSP View</description>
+    <name>Curriculeon SpringBoot JSP Login Page</name>
+    <description>Demo project for Spring Boot With Login JSP View</description>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>

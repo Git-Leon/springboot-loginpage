@@ -1,24 +1,22 @@
-package com.github.perscholas.model;
+package com.github.curriculeon.model;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "user")
-public class User {
+public class UserProfile {
     @Id
-    @Column (name = "id") // name if id column
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy =  GenerationType.AUTO)
     private Long id;
     private String username;
     private String password;
 
-    @Transient
+    @Transient // don't persist; not a column
     private String passwordConfirm;
 
-    @ManyToMany(targetEntity = Role.class, fetch=FetchType.EAGER)
-    @ElementCollection(targetClass = Role.class)
-    private List<Role> userRoles;
+    @ManyToMany
+    @ElementCollection
+    private List<UserProfileRole> userRoles;
 
     public Long getId() {
         return id;
@@ -52,11 +50,11 @@ public class User {
         this.passwordConfirm = passwordConfirm;
     }
 
-    public List<Role> getUserRoles() {
+    public List<UserProfileRole> getUserRoles() {
         return userRoles;
     }
 
-    public void setUserRoles(List<Role> userRoles) {
+    public void setUserRoles(List<UserProfileRole> userRoles) {
         this.userRoles = userRoles;
     }
 }

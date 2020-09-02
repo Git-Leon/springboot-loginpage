@@ -1,25 +1,22 @@
-package com.github.perscholas.model;
+package com.github.curriculeon.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 @Entity
-@Table(name = "role")
-public class Role {
+public class UserProfileRole {
 
     @Id
-    @Column (name = "id") // name if id column
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy =  GenerationType.AUTO)
     private Long id;
     private String name;
 
     @JsonIgnore
-    @ManyToMany(targetEntity = User.class, fetch=FetchType.EAGER)
-    @ElementCollection(targetClass = User.class)
-    private List<User> users;
+    @ManyToMany
+    @ElementCollection
+    private List<UserProfile> users;
 
     public Long getId() {
         return id;
@@ -37,11 +34,11 @@ public class Role {
         this.name = name;
     }
 
-    public List<User> getUsers() {
+    public List<UserProfile> getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(List<UserProfile> users) {
         this.users = users;
     }
 }
